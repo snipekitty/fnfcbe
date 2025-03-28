@@ -12,7 +12,7 @@
       "instrumental": "pico",
       "altInstrumentals": []
     },
-    "stage": "spookyMansion",
+    "stage": "spookyMansionErect",
     "noteStyle": "funkin",
     "ratings": { "easy": 3, "normal": 4, "hard": 7 },
     "album": "expansion2",

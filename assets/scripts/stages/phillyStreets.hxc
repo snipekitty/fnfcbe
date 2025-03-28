@@ -130,13 +130,13 @@ class PhillyStreetsStage extends Stage
 		{
 			case "darnell":
 				rainShaderStartIntensity = 0;
-				rainShaderEndIntensity = 0.1;
+				rainShaderEndIntensity = 0;
 			case "lit-up":
-				rainShaderStartIntensity = 0.1;
-				rainShaderEndIntensity = 0.2;
+				rainShaderStartIntensity = 0;
+				rainShaderEndIntensity = 0;
 			case "2hot":
-				rainShaderStartIntensity = 0.2;
-				rainShaderEndIntensity = 0.4;
+				rainShaderStartIntensity = 0;
+				rainShaderEndIntensity = 0;
 		}
 
 		rainShader.intensity = rainShaderStartIntensity;
