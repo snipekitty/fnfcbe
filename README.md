@@ -16,7 +16,7 @@ THIS IS JUST A FUN LITTLE PROJECT FOR FRIENDS
 ## To-do list
 *anything that is "removed" may be a togglable option or something that is unloaded instead of removed entirely*
 
-- Replacing laggy "erect" maps with original versions - Doesn't make a difference
+- <del>Replacing laggy "erect" maps with original versions</del>- Not fully completed but have made at least week 2 erect stage run a little better (still need to remove lighting probably)
 - Allow certain debug keys without debug mode, and unlock all songs and characters automatically (so basically just weekend stuff) - I'm pretty sure this already exists
 - Remove special effects/shaders that lag game
 - Removing rain from weekend songs
