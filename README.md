@@ -17,7 +17,7 @@ THIS IS JUST A FUN LITTLE PROJECT FOR FRIENDS
 *anything that is "removed" may be a togglable option or something that is unloaded instead of removed entirely*
 
 - Replacing laggy "erect" maps with original versions - Doesn't make a difference
-- Allow certain debug keys without debug mode, and unlock all songs and characters automatically (so basically just weekend stuff)
+- Allow certain debug keys without debug mode, and unlock all songs and characters automatically (so basically just weekend stuff) - I'm pretty sure this already exists
 - Remove special effects/shaders that lag game
 - Removing rain from weekend songs
 - Anti Aliasing option (or just turned off automatically)
