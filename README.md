@@ -11,7 +11,7 @@ SUPPORT THE ORIGINAL GAME!!!!!
 
 - https://ninja-muffin24.itch.io/funkin
 
-THIS IS JUST A FUN LITTLE PROJECT FOR FRIENDS
+THIS IS JUST A FUN LITTLE PROJECT MADE FOR FRIENDS
 
 ## To-do list
 *anything that is "removed" may be a togglable option or something that is unloaded instead of removed entirely*
