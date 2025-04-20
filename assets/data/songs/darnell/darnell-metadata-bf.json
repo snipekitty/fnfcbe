@@ -12,10 +12,10 @@
       "instrumental": "bf",
       "altInstrumentals": []
     },
-    "stage": "phillyStreets",
+    "stage": "phillyStreetsErect",
     "noteStyle": "funkin",
-    "ratings": { "easy": 2, "normal": 3, "hard": 4 },
-    "album": "expansion2",
+    "ratings": { "easy": 3, "normal": 4, "hard": 5 },
+    "album": "volume4",
     "previewStart": 0,
     "previewEnd": 15000
   },

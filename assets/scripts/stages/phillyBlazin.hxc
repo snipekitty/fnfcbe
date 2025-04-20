@@ -33,8 +33,8 @@ class PhillyBlazinStage extends Stage
 		cameraDarkened = false;
 		lightningActive = true;
 
-		rainShader.scale = FlxG.height / 200; // adjust this value so that the rain looks nice
-		rainShader.intensity = 0.5;
+		rainShader.scale = FlxG.height / 0; // adjust this value so that the rain looks nice
+		rainShader.intensity = 0;
 
 		rainShaderFilter = new ShaderFilter(rainShader);
 		FlxG.camera.filters = [rainShaderFilter];

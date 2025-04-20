@@ -20,7 +20,7 @@ class SpookyMansionStage extends Stage
 			FunkinSound.playOnce(Paths.soundRandom('thunder_', 1, 2), 1.0);
 		}
 
-		getNamedProp('halloweenBG').animation.play('lightning');
+		//getNamedProp('halloweenBG').animation.play('lightning');
 
 		lightningStrikeBeat = beat;
 		lightningStrikeOffset = FlxG.random.int(8, 24);

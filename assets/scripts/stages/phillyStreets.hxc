@@ -123,7 +123,7 @@ class PhillyStreetsStage extends Stage
 		// carSndAmbience.play(false, FlxG.random.float(0, carSndAmbience.length));
 
 		// rainShader.puddleMap = Assets.getBitmapData(Paths.image("phillyStreets/puddle"));
-		rainShader.scale = FlxG.height / 200; // adjust this value so that the rain looks nice
+		rainShader.scale = FlxG.height / 0; // adjust this value so that the rain looks nice
 
 		FlxG.console.registerObject("rainShader", rainShader);
 		switch (PlayState.instance.currentSong.id)
@@ -375,10 +375,20 @@ class PhillyStreetsStage extends Stage
 	{
 		super.onUpdate(event);
 
-		var remappedIntensityValue:Float = FlxMath.remapToRange(Conductor.instance.songPosition, 0, FlxG.sound.music != null ? FlxG.sound.music.length : 0.0, rainShaderStartIntensity, rainShaderEndIntensity);
-		rainShader.intensity = remappedIntensityValue;
-		rainShader.updateViewInfo(FlxG.width, FlxG.height, FlxG.camera);
-		rainShader.update(event.elapsed);
+		if (FlxG.sound.music != null)
+		{
+			var remappedIntensityValue:Float = FlxMath.remapToRange(Conductor.instance.songPosition, 0, FlxG.sound.music.length, rainShaderStartIntensity, rainShaderEndIntensity);
+			rainShader.intensity = remappedIntensityValue;
+			rainShader.updateViewInfo(FlxG.width, FlxG.height, FlxG.camera);
+			rainShader.update(event.elapsed);
+		}
+		else
+		{
+			rainShader.intensity = rainShaderStartIntensity;
+			rainShader.updateViewInfo(FlxG.width, FlxG.height, FlxG.camera);
+			rainShader.update(event.elapsed);
+		}
+
 
 		if(scrollingSky != null) scrollingSky.scrollX -= FlxG.elapsed * 22;
 
