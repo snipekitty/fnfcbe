@@ -309,7 +309,7 @@ class PhillyTrainErectStage extends Stage
 		super.buildStage();
 
 		// NOTE: You pass the constructor variables directly, not as an array.
-		lightShader = ScriptedFlxRuntimeShader.init('BuildingEffectShader', 1.0);
+			//lightShader = ScriptedFlxRuntimeShader.init('BuildingEffectShader', 1.0);
 		trainSound = new FlxSound().loadEmbedded(Paths.sound('train_passes'));
 
     colorShader = new AdjustColorShader();
@@ -324,7 +324,7 @@ class PhillyTrainErectStage extends Stage
 		for (i in 0...LIGHT_COUNT)
 		{
 			var light:FlxSprite = getNamedProp('lights' + i);
-			light.shader = lightShader;
+			//light.shader = lightShader;
 			light.visible = false;
 		}
 
@@ -349,7 +349,7 @@ class PhillyTrainErectStage extends Stage
 		if(cutsceneTimerManager != null) cutsceneTimerManager.update(event.elapsed);
 		// Update beat lights
 		var shaderInput:Float = (Conductor.instance.beatLengthMs / 1000) * event.elapsed * 1.5;
-		lightShader.scriptCall('update', [shaderInput]);
+		//lightShader.scriptCall('update', [shaderInput]);
 
 		var amount:Int = 1;
 
@@ -421,7 +421,7 @@ class PhillyTrainErectStage extends Stage
 		if (event.beat % 4 == 0)
 		{
 			// Reset opacity
-			lightShader.scriptCall('reset');
+			//lightShader.scriptCall('reset');
 
 			// Switch to a different light
 			curLight = FlxG.random.int(0, LIGHT_COUNT - 1);
@@ -493,6 +493,6 @@ class PhillyTrainErectStage extends Stage
 	{
 		super.kill();
 		if(cutsceneTimerManager != null) cutsceneTimerManager.destroy();
-		lightShader = null;
+		//lightShader = null;
 	}
 }
