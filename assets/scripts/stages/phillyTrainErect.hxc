@@ -31,7 +31,7 @@ class PhillyTrainErectStage extends Stage
 
 	var lightShader:FlxRuntimeShader;
 	var trainSound:FlxSound;
-  var colorShader:AdjustColorShader;
+  //var colorShader:AdjustColorShader;
 	var cutsceneMusic:FunkinSound;
 
 	var hasPlayedInGameCutscene:Bool = false;
@@ -168,9 +168,9 @@ class PhillyTrainErectStage extends Stage
 		PlayState.instance.currentStage.add(bloodPool);
 		PlayState.instance.currentStage.refresh();
 
-		picoPlayer.shader = colorShader;
-		picoOpponent.shader = colorShader;
-		bloodPool.shader = colorShader;
+		//picoPlayer.shader = colorShader;
+		//picoOpponent.shader = colorShader;
+		//bloodPool.shader = colorShader;
 
 		PlayState.instance.currentStage.getBoyfriend().visible = false;
 		PlayState.instance.currentStage.getDad().visible = false;
@@ -312,12 +312,12 @@ class PhillyTrainErectStage extends Stage
 			//lightShader = ScriptedFlxRuntimeShader.init('BuildingEffectShader', 1.0);
 		trainSound = new FlxSound().loadEmbedded(Paths.sound('train_passes'));
 
-    colorShader = new AdjustColorShader();
-		colorShader.hue = -26;
-		colorShader.saturation = -16;
-		colorShader.contrast = 0;
-		colorShader.brightness = -5;
-		getNamedProp('train').shader = colorShader;
+    //colorShader = new AdjustColorShader();
+		//colorShader.hue = -26;
+		//colorShader.saturation = -16;
+		//colorShader.contrast = 0;
+		//colorShader.brightness = -5;
+		//getNamedProp('train').shader = colorShader;
 
 		FlxG.sound.list.add(trainSound);
 
@@ -392,14 +392,14 @@ class PhillyTrainErectStage extends Stage
 		super.addCharacter(character, charType);
 		trace('Applied stage shader to ' + character.characterName);
 
-		shader = new AdjustColorShader();
+		//shader = new AdjustColorShader();
 
-    shader.hue = -26;
-		shader.saturation = -16;
-		shader.contrast = 0;
-		shader.brightness = -5;
+    //shader.hue = -26;
+		//shader.saturation = -16;
+		//shader.contrast = 0;
+		//shader.brightness = -5;
 
-		character.shader = shader;
+		//character.shader = shader;
 
 	}
 
