@@ -24,3 +24,7 @@ THIS IS JUST A FUN LITTLE PROJECT MADE FOR FRIENDS
 - Add mods seperated by folders (in the freeplay menu)
 - Really bad computer option: All assets except notes and chart is unloaded
 - Add source code to the github - still havent been able to do, but will do once I understand a bit more about github.
+
+## Next Update Maybe
+
+- Making BF spritesheet more optimized (separating the different animations that ARE USED and removing unused animations that aren't
