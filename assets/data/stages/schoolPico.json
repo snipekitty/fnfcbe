@@ -1,0 +1,45 @@
+{
+  "props": [
+    {
+      "danceEvery": 0,
+      "zIndex": 10,
+      "position": [-626, -78],
+      "scale": [6, 6],
+      "animType": "sparrow",
+      "name": "sky",
+      "isPixel": true,
+      "assetPath": "weeb/erect/weebSky",
+      "scroll": [0.2, 0.2],
+      "animations": []
+    },
+    {
+      "danceEvery": 0,
+      "zIndex": 30,
+      "position": [-662, 6],
+      "scale": [6, 6],
+      "animType": "sparrow",
+      "name": "street",
+      "isPixel": true,
+      "assetPath": "weeb/erect/weebStreet",
+      "scroll": [1, 1],
+      "animations": []
+    }
+  ],
+  "cameraZoom": 1,
+  "version": "1.0.0",
+  "characters": {
+    "bf": {
+      "zIndex": 300,
+      "cameraOffsets": [-290, -100],
+      "position": [1258, 918]
+    },
+    "dad": {
+      "zIndex": 200,
+      "cameraOffsets": [160, 0],
+      "position": [306, 960]
+    },
+    "gf": { "zIndex": 100, "cameraOffsets": [0, 0], "position": [702, 610] }
+  },
+  "name": "School (Date) [Pico]",
+  "directory": "week6"
+}

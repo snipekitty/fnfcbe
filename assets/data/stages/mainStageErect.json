@@ -1,0 +1,53 @@
+{
+  "props": [
+    {
+      "name": "solid",
+      "zIndex": 0,
+      "assetPath": "#222026",
+      "position": [-500, -1000],
+      "scale": [2400, 2000],
+      "scroll": [0, 0]
+    },
+    {
+      "danceEvery": 0,
+      "zIndex": 20,
+      "position": [-765, -247],
+      "scale": [1, 1],
+      "animType": "sparrow",
+      "name": "bg",
+      "isPixel": false,
+      "assetPath": "erect/bg",
+      "scroll": [1, 1],
+      "animations": []
+    },
+    {
+      "danceEvery": 0,
+      "zIndex": 4000,
+      "position": [-847, -245],
+      "scale": [1, 1],
+      "animType": "sparrow",
+      "name": "lights",
+      "isPixel": false,
+      "assetPath": "erect/lights",
+      "scroll": [1.2, 1.2],
+      "animations": []
+    }
+  ],
+  "cameraZoom": 0.85,
+  "version": "1.0.0",
+  "characters": {
+    "bf": {
+      "zIndex": 300,
+      "position": [977.5, 865],
+      "cameraOffsets": [-170, -140]
+    },
+    "dad": {
+      "zIndex": 200,
+      "position": [40, 850],
+      "cameraOffsets": [270, -100]
+    },
+    "gf": { "zIndex": 100, "cameraOffsets": [0, 0], "position": [501.5, 825] }
+  },
+  "name": "Main Stage [Erect]",
+  "directory": "week1"
+}

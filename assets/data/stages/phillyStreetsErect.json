@@ -1,0 +1,92 @@
+{
+  "props": [
+    {
+      "danceEvery": 0,
+      "zIndex": 20,
+      "position": [-545, -273],
+      "scale": [1, 1],
+      "animType": "sparrow",
+      "name": "phillySkyline",
+      "isPixel": false,
+      "assetPath": "phillyStreets/erect/phillySkyline",
+      "scroll": [0.2, 0.2],
+      "alpha": 1,
+      "animations": []
+    },
+    {
+      "danceEvery": 0,
+      "zIndex": 30,
+      "position": [600, 69],
+      "scale": [1, 1],
+      "animType": "sparrow",
+      "name": "phillyForegroundCity",
+      "isPixel": false,
+      "assetPath": "phillyStreets/erect/phillyForegroundCity",
+      "scroll": [0.3, 0.3],
+      "alpha": 1,
+      "animations": []
+    },
+    {
+      "danceEvery": 0,
+      "zIndex": 30,
+      "position": [1860, 185],
+      "scale": [1, 1],
+      "animType": "sparrow",
+      "name": "phillyForegroundCity2",
+      "isPixel": false,
+      "assetPath": "phillyStreets/erect/phillyForegroundCity",
+      "scroll": [0.3, 0.3],
+      "alpha": 1,
+      "angle": 5,
+      "flipX": true,
+      "animations": []
+    },
+    {
+      "danceEvery": 0,
+      "zIndex": 40,
+      "position": [1795, 360],
+      "scale": [1, 1],
+      "animType": "sparrow",
+      "name": "phillyConstruction2",
+      "isPixel": false,
+      "assetPath": "phillyStreets/erect/phillyConstruction",
+      "scroll": [0.7, 1],
+      "alpha": 1,
+      "animations": []
+    },
+    {
+      "danceEvery": 0,
+      "zIndex": 100,
+      "position": [88, 317],
+      "scale": [1, 1],
+      "animType": "sparrow",
+      "name": "phillyForeground",
+      "isPixel": false,
+      "assetPath": "phillyStreets/erect/phillyForeground",
+      "scroll": [1, 1],
+      "alpha": 1,
+      "animations": []
+    }
+  ],
+  "cameraZoom": 0.77,
+  "version": "1.0.0",
+  "characters": {
+    "bf": {
+      "zIndex": 400,
+      "position": [2151, 1228],
+      "cameraOffsets": [-350, -100]
+    },
+    "gf": {
+      "zIndex": 300,
+      "position": [1520, 1080],
+      "cameraOffsets": [0, 0]
+    },
+    "dad": {
+      "zIndex": 350,
+      "position": [920, 1310],
+      "cameraOffsets": [500, -100]
+    }
+  },
+  "name": "Philly (Streets) [Erect]",
+  "directory": "weekend1"
+}

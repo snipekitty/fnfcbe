@@ -1,0 +1,60 @@
+{
+  "version": "1.0.0",
+  "cameraZoom": 0.9,
+  "props": [
+    {
+      "zIndex": 10,
+      "danceEvery": 0,
+      "position": [-220, -80],
+      "scale": [0.9, 0.9],
+      "name": "limoSunset",
+      "animType": "sparrow",
+      "isPixel": false,
+      "scroll": [0.1, 0.1],
+      "assetPath": "limo/erect/limoSunset",
+      "animations": []
+    },
+    {
+      "zIndex": 150,
+      "danceEvery": 0,
+      "position": [-120, 520],
+      "scale": [1, 1],
+      "name": "limo",
+      "animType": "sparrow",
+      "isPixel": false,
+      "startingAnimation": "drive",
+      "scroll": [1, 1],
+      "assetPath": "limo/erect/limoDrive",
+      "animations": [
+        {
+          "offsets": [0, 0],
+          "flipY": false,
+          "frameRate": 24,
+          "prefix": "Limo stage",
+          "name": "drive",
+          "looped": true,
+          "flipX": false
+        }
+      ]
+    }
+  ],
+  "characters": {
+    "bf": {
+      "zIndex": 300,
+      "position": [1217.5, 592],
+      "cameraOffsets": [-300, -100]
+    },
+    "gf": {
+      "zIndex": 100,
+      "position": [787, 779],
+      "cameraOffsets": [0, 0]
+    },
+    "dad": {
+      "zIndex": 200,
+      "position": [329.5, 913],
+      "cameraOffsets": [150, 0]
+    }
+  },
+  "name": "Limo Ride [Erect]",
+  "directory": "week4"
+}
