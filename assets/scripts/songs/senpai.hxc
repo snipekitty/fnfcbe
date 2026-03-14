@@ -20,11 +20,18 @@ class SenpaiSong extends Song
     super('senpai');
   }
 
-  public override function isSongNew(currentDifficulty:String, currentVariation:String):Bool
+  public override function listAltInstrumentalIds(difficultyId:String, variationId:String):Array<String>
   {
-    if (currentVariation == 'pico') return !Save.instance.hasBeatenSong(this.id, null, 'pico');
+    var results:Array<String> = super.listAltInstrumentalIds(difficultyId, variationId);
 
-    return false;
+    if (difficultyId == 'easy' || difficultyId == 'normal' || difficultyId == 'hard')
+    {
+      var hasBeatenPicoMix = Save.instance.hasBeatenSong(this.id, null, 'pico');
+
+      if (!hasBeatenPicoMix) results = [for (id in results) if (id != 'pico') id];
+    }
+
+    return results;
   }
 
   public override function onCountdownStart(event:CountdownScriptEvent):Void
@@ -32,7 +39,7 @@ class SenpaiSong extends Song
     super.onCountdownStart(event);
 
     // Skip the cutscene unless we are in Story Mode, or Pico Mix specifically.
-    if (PlayState.instance.currentVariation != 'pico' && !PlayStatePlaylist.isStoryMode) hasPlayedCutscene = true;
+    if (!PlayStatePlaylist.isStoryMode) hasPlayedCutscene = true;
 
     // Skip the cutscene if we're playtesting in the Chart Editor.
     if (PlayState.instance.isChartingMode && !hasPlayedCutscene) hasPlayedCutscene = true;
@@ -52,26 +59,6 @@ class SenpaiSong extends Song
     }
   }
 
-  public override function listAltInstrumentalIds(difficultyId:String, variationId:String):Array<String>
-  {
-    if (difficultyId == 'easy' || difficultyId == 'normal' || difficultyId == 'hard')
-    {
-      var hasBeatenPicoMix = Save.instance.hasBeatenSong(this.id, null, 'pico');
-
-      switch (variationId)
-      {
-        case 'pico':
-          // return hasBeatenPicoMix ? [''] : [];
-          // No Pico mix on BF instrumental, sorry!
-          return [];
-        default:
-          return hasBeatenPicoMix ? ['pico'] : [];
-      }
-    }
-
-    return [];
-  }
-
   function transitionToDialogue()
   {
     trace('Transitioning to dialogue.');
@@ -87,31 +74,32 @@ class SenpaiSong extends Song
 
     black.alpha = 1.0;
 
-    var tweenFunction = function(x) {
+    var tweenFunction = function(x)
+    {
       var xSnapped = Math.floor(x * 8) / 8;
       // black.alpha = 1.0 - xSnapped;
     };
 
-    new FlxTimer().start(0.25, _ -> {
+    new FlxTimer().start(0.25, _ ->
+    {
       PlayState.instance.remove(black);
       RetroCameraFade.fadeBlack(PlayState.instance.camGame, 12, 2);
     });
 
-    FlxTween.num(0.0, 1.0, 2.0,
+    FlxTween.num(0.0, 1.0, 2.0, {
+      ease: FlxEase.linear,
+      startDelay: 0.25,
+      onComplete: function(input)
       {
-        ease: FlxEase.linear,
-        startDelay: 0.25,
-        onComplete: function(input) {
-          startDialogue();
-        }
-      }, tweenFunction);
+        startDialogue();
+      }
+    }, tweenFunction);
   }
 
   function startDialogue()
   {
     PlayState.instance.disableKeys = false;
-    var targetDialogue = PlayState.instance.currentVariation == 'pico' ? 'senpai-pico' : 'senpai';
-    PlayState.instance.startConversation(targetDialogue);
+    PlayState.instance.startConversation('senpai');
   }
 
   /**

@@ -13,6 +13,22 @@
       "scale": [1.75, 1.75]
     },
     {
+      "zIndex": 20,
+      "position": [50, -300],
+      "animType": "sparrow",
+      "name": "lightning",
+      "assetPath": "phillyBlazin/lightning",
+      "scroll": [0.0, 0.0],
+      "scale": [1.75, 1.75],
+      "animations": [
+        {
+          "name": "strike",
+          "prefix": "lightning0",
+          "offsets": [0, 0]
+        }
+      ]
+    },
+    {
       "zIndex": 30,
       "position": [-600, -175],
       "animType": "sparrow",

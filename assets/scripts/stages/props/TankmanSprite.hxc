@@ -41,8 +41,10 @@ class TankmanSprite extends FunkinSprite
   {
     // ERIC: You have to use super instead of this or it breaks.
     // This is because typeof(this) is PolymodAbstractClass.
-     tankmanFlicker = FlxFlicker.flicker(super, 0.3, 1 / 10, true, true, function(_) {
-      tankmanFlicker = FlxFlicker.flicker(super, 0.3, 1 / 20, false, true, function(_) {
+    tankmanFlicker = FlxFlicker.flicker(super, 0.3, 1 / 10, true, true, function(_)
+    {
+      tankmanFlicker = FlxFlicker.flicker(super, 0.3, 1 / 20, false, true, function(_)
+      {
         tankmanFlicker = null;
         kill();
       });
@@ -53,29 +55,31 @@ class TankmanSprite extends FunkinSprite
 
   public function addRimlight()
   {
-    //rim = new DropShadowShader();
+    rim = new DropShadowShader();
 
-    //rim.baseBrightness = -46;
-    //rim.baseHue = -38;
-    //rim.baseContrast = -25;
-    //rim.baseSaturation = -20;
+    rim.baseBrightness = -46;
+    rim.baseHue = -38;
+    rim.baseContrast = -25;
+    rim.baseSaturation = -20;
 
-    //rim.threshold = 0.4;
+    rim.threshold = 0.4;
 
-    //rim.color = 0xFFDFEF3C;
+    rim.color = 0xFFDFEF3C;
+    rim.attachedSprite = this.superClass;
 
-    //shader = rim;
+    shader = rim;
 
     // rim.attachedSprite = tankman;
 
-    animation.onFrameChange.add(function() {
-      //rim.updateFrameInfo(this.frame);
+    animation.onFrameChange.add(function()
+    {
+      rim.updateFrameInfo(this.frame);
     });
 
     // If goingRight is false, 0 degrees = facing right.
     // If goingRight is true, 0 degrees = facing left.
 
-    //rim.angle = 135; // goingRight ? 135 : 45;
+    rim.angle = 135; // goingRight ? 135 : 45;
   }
 
   function initAnim()

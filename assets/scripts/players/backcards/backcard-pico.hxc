@@ -6,7 +6,7 @@ import funkin.util.BitmapUtil;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxTimer;
-import funkin.graphics.adobeanimate.FlxAtlasSprite;
+import funkin.graphics.FunkinSprite;
 import flixel.addons.display.FlxBackdrop;
 import funkin.ui.FullScreenScaleMode;
 import funkin.Conductor;
@@ -22,7 +22,7 @@ class PicoCard extends BackingCard
   var glowDark:FlxSprite;
   var blueBar:FlxSprite;
 
-  var confirmAtlas:FlxAtlasSprite;
+  var confirmAtlas:FunkinSprite;
 
   public function new()
   {
@@ -42,40 +42,35 @@ class PicoCard extends BackingCard
     super.applyExitMovers(exitMovers, exitMoversCharSel);
     if (exitMovers == null || exitMoversCharSel == null) return;
 
-    exitMoversCharSel.set([scrollTop],
-      {
-        y: -90,
-        speed: 0.8,
-        wait: 0.1
-      });
+    exitMoversCharSel.set([scrollTop], {
+      y: -90,
+      speed: 0.8,
+      wait: 0.1
+    });
 
-    exitMoversCharSel.set([scrollMiddle],
-      {
-        y: -80,
-        speed: 0.8,
-        wait: 0.1
-      });
+    exitMoversCharSel.set([scrollMiddle], {
+      y: -80,
+      speed: 0.8,
+      wait: 0.1
+    });
 
-    exitMoversCharSel.set([blueBar],
-      {
-        y: -70,
-        speed: 0.8,
-        wait: 0.1
-      });
+    exitMoversCharSel.set([blueBar], {
+      y: -70,
+      speed: 0.8,
+      wait: 0.1
+    });
 
-    exitMoversCharSel.set([scrollLower],
-      {
-        y: -60,
-        speed: 0.8,
-        wait: 0.1
-      });
+    exitMoversCharSel.set([scrollLower], {
+      y: -60,
+      speed: 0.8,
+      wait: 0.1
+    });
 
-    exitMoversCharSel.set([scrollBack],
-      {
-        y: -50,
-        speed: 0.8,
-        wait: 0.1
-      });
+    exitMoversCharSel.set([scrollBack], {
+      y: -50,
+      speed: 0.8,
+      wait: 0.1
+    });
   }
 
   public override function onCreate(event:ScriptEvent):Void
@@ -145,11 +140,21 @@ class PicoCard extends BackingCard
     glow.visible = false;
     glowDark.visible = false;
 
-    confirmAtlas = new FlxAtlasSprite(5, 55, Paths.animateAtlas("freeplay/backingCards/pico/pico-confirm"));
+    confirmAtlas = FunkinSprite.createTextureAtlas((FreeplayState.CUTOUT_WIDTH * FreeplayState.DJ_POS_MULTI) - 120, 55,
+      "freeplay/backingCards/pico/pico-confirm");
     confirmAtlas.visible = false;
-    confirmAtlas.scale.x *= FullScreenScaleMode.wideScale.x;
-    confirmAtlas.x += ((confirmAtlas.width * FullScreenScaleMode.wideScale.x) - confirmAtlas.width) * 2.58;
     add(confirmAtlas);
+
+    // multiply the scale of the bg by 2
+    // this should be enough, since no phone screen should ever be bigger than whatever
+    // this gets scaled to
+    confirmAtlas.scaleElement(confirmAtlas.getFirstElement("backplate flat blue"), 2, 100);
+    confirmAtlas.scaleElement(confirmAtlas.getFirstElement("pink back"), 2, 100);
+    confirmAtlas.scaleElement(confirmAtlas.getFirstElement("black flash"), 2, 100);
+    confirmAtlas.scaleElement(confirmAtlas.getFirstElement("white flash"), 2, 100);
+    confirmAtlas.scaleElement(confirmAtlas.getFirstElement("blue flash"), 2, 100);
+    confirmAtlas.scaleElement(confirmAtlas.getFirstElement("blue flash 2"), 2, 100);
+    confirmAtlas.scaleElement(confirmAtlas.getFirstElement("pink flash"), 2, 100);
 
     cardGlow.blend = 0;
     cardGlow.visible = false;
@@ -161,67 +166,72 @@ class PicoCard extends BackingCard
     confirmAtlas.visible = true;
     confirmAtlas.anim.play("");
 
-    FlxTween.color(instance.backingImage, 10 / 24, 0xFFFFFFFF, 0xFF8A8A8A,
+    FlxTween.color(instance.backingImage, 10 / 24, 0xFFFFFFFF, 0xFF8A8A8A, {
+      ease: FlxEase.expoOut,
+      onUpdate: function(_)
       {
+        instance.angleMaskShader.extraColor = instance.backingImage.color;
+      }
+    });
+
+    new FlxTimer().start(10 / 24, function(_)
+    {
+      // shoot
+      FlxTween.color(instance.backingImage, 3 / 24, 0xFF343036, 0xFF696366, {
         ease: FlxEase.expoOut,
-        onUpdate: function(_) {
+        onUpdate: function(_)
+        {
           instance.angleMaskShader.extraColor = instance.backingImage.color;
         }
       });
-
-    new FlxTimer().start(10 / 24, function(_) {
-      // shoot
-      FlxTween.color(instance.backingImage, 3 / 24, 0xFF343036, 0xFF696366,
-        {
-          ease: FlxEase.expoOut,
-          onUpdate: function(_) {
-            instance.angleMaskShader.extraColor = instance.backingImage.color;
-          }
-        });
     });
 
-    new FlxTimer().start(14 / 24, function(_) {
+    new FlxTimer().start(14 / 24, function(_)
+    {
       // shoot
-      FlxTween.color(instance.backingImage, 3 / 24, 0xFF27292D, 0xFF686A6F,
+      FlxTween.color(instance.backingImage, 3 / 24, 0xFF27292D, 0xFF686A6F, {
+        ease: FlxEase.expoOut,
+        onUpdate: function(_)
         {
-          ease: FlxEase.expoOut,
-          onUpdate: function(_) {
-            instance.angleMaskShader.extraColor = instance.backingImage.color;
-          }
-        });
+          instance.angleMaskShader.extraColor = instance.backingImage.color;
+        }
+      });
     });
 
-    new FlxTimer().start(18 / 24, function(_) {
+    new FlxTimer().start(18 / 24, function(_)
+    {
       // shoot
-      FlxTween.color(instance.backingImage, 3 / 24, 0xFF2D282D, 0xFF676164,
+      FlxTween.color(instance.backingImage, 3 / 24, 0xFF2D282D, 0xFF676164, {
+        ease: FlxEase.expoOut,
+        onUpdate: function(_)
         {
-          ease: FlxEase.expoOut,
-          onUpdate: function(_) {
-            instance.angleMaskShader.extraColor = instance.backingImage.color;
-          }
-        });
+          instance.angleMaskShader.extraColor = instance.backingImage.color;
+        }
+      });
     });
 
-    new FlxTimer().start(21 / 24, function(_) {
+    new FlxTimer().start(21 / 24, function(_)
+    {
       // shoot
-      FlxTween.color(instance.backingImage, 3 / 24, 0xFF29292F, 0xFF62626B,
+      FlxTween.color(instance.backingImage, 3 / 24, 0xFF29292F, 0xFF62626B, {
+        ease: FlxEase.expoOut,
+        onUpdate: function(_)
         {
-          ease: FlxEase.expoOut,
-          onUpdate: function(_) {
-            instance.angleMaskShader.extraColor = instance.backingImage.color;
-          }
-        });
+          instance.angleMaskShader.extraColor = instance.backingImage.color;
+        }
+      });
     });
 
-    new FlxTimer().start(24 / 24, function(_) {
+    new FlxTimer().start(24 / 24, function(_)
+    {
       // shoot
-      FlxTween.color(instance.backingImage, 3 / 24, 0xFF29232C, 0xFF808080,
+      FlxTween.color(instance.backingImage, 3 / 24, 0xFF29232C, 0xFF808080, {
+        ease: FlxEase.expoOut,
+        onUpdate: function(_)
         {
-          ease: FlxEase.expoOut,
-          onUpdate: function(_) {
-            instance.angleMaskShader.extraColor = instance.backingImage.color;
-          }
-        });
+          instance.angleMaskShader.extraColor = instance.backingImage.color;
+        }
+      });
     });
   }
 

@@ -8,9 +8,7 @@ import funkin.util.HapticUtil;
 import funkin.audio.FunkinSound;
 import funkin.Conductor;
 import funkin.Preferences;
-import funkin.graphics.adobeanimate.FlxAtlasSprite;
 import funkin.graphics.FunkinSprite;
-import funkin.modding.base.ScriptedFlxAtlasSprite;
 import funkin.play.cutscene.CutsceneType;
 import funkin.play.cutscene.VideoCutscene;
 import funkin.play.GameOverSubState;
@@ -20,21 +18,20 @@ import funkin.play.song.Song;
 import funkin.play.stage.StageProp;
 import funkin.save.Save;
 import funkin.ui.FullScreenScaleMode;
+import funkin.FunkinMemory;
 
 // We have to use FlxBasePoint in scripts because FlxPoint is inlined and not available in scripts
 class TwoHOTSong extends Song
 {
   var hasPlayedCutscene:Bool = false;
-  // var tempConductor:Conductor;
-  var cutsceneMusic:FunkinSound;
+  var cutsceneConductor:Null<Conductor>;
 
-  var canDamageVibrationPreset:VibrationPreset =
-    {
-      period: 0.1,
-      duration: 0.1,
-      amplitude: 1,
-      sharpness: 1
-    };
+  var canVibrationPreset:VibrationPreset = {
+    period: 0.1,
+    duration: 0.1,
+    amplitude: 1,
+    sharpness: 1
+  };
 
   function new()
   {
@@ -104,12 +101,18 @@ class TwoHOTSong extends Song
     VideoCutscene.onVideoStarted.removeAll();
     VideoCutscene.hideVideo();
 
-    new FlxTimer().start(1, function(tmr) {
+    // This ensures Nene plays 'danceLeft' so that she syncs correctly with the cutscene video
+    PlayState.instance.currentStage.getGirlfriend().hasDanced = false;
+    PlayState.instance.currentStage.getGirlfriend().dance(true);
+
+    new FlxTimer().start(1, function(tmr)
+    {
       PlayState.instance.tweenCameraToPosition(1539, 833.5, 2, FlxEase.quadInOut);
       PlayState.instance.tweenCameraZoom(0.69, 2, true, FlxEase.quadInOut);
     });
 
-    new FlxTimer().start(2, function(tmr) {
+    new FlxTimer().start(2, function(tmr)
+    {
       PlayState.instance.currentStage.getBoyfriend().playAnimation('intro1', true, true);
       if (FlxG.onMobile)
       {
@@ -118,11 +121,14 @@ class TwoHOTSong extends Song
       }
       FullScreenScaleMode.addCutouts(3.0, FlxEase.quintOut);
     });
-    new FlxTimer().start(2.5, function(tmr) {
+
+    new FlxTimer().start(2.5, function(tmr)
+    {
       PlayState.instance.currentStage.getDad().playAnimation('pissed', true, true);
     });
 
-    new FlxTimer().start(6, function(tmr) {
+    new FlxTimer().start(6, function(tmr)
+    {
       // video would play around here
       // PlayState.instance.endSong(true);
 
@@ -144,12 +150,23 @@ class TwoHOTSong extends Song
   function startCutscene()
   {
     VideoCutscene.onVideoStarted.add(endCutscene);
-    VideoCutscene.onVideoEnded.addOnce(function() {
+    VideoCutscene.onVideoEnded.addOnce(function()
+    {
       if (FlxG.onMobile)
       {
         PlayState.instance.pauseButton.x = (FlxG.width - PlayState.instance.pauseButton.width) - Math.max(40, FullScreenScaleMode.gameNotchSize.x);
       }
       FullScreenScaleMode.removeCutouts();
+    });
+
+    cutsceneConductor = new Conductor();
+    cutsceneConductor.forceBPM(86.5);
+    cutsceneConductor.onBeatHit.add(() ->
+    {
+      if (PlayState.instance.currentStage.getGirlfriend().isAnimationFinished())
+      {
+        PlayState.instance.currentStage.getGirlfriend().dance(true);
+      }
     });
 
     PlayState.instance.camHUD.visible = false;
@@ -195,7 +212,7 @@ class TwoHOTSong extends Song
   }
 
   var gunCocked:Bool = false;
-  var spawnedCans:Array<ScriptedFlxAtlasSprite> = [];
+  var spawnedCans:Array<SpraycanAtlasSprite> = [];
 
   function onNoteHit(event:HitNoteScriptEvent)
   {
@@ -210,15 +227,14 @@ class TwoHOTSong extends Song
         // This creates the can and starts the animation.
         // We define the behavior of the can in a separate scripted class,
         // which allows the can to track and manage its own properties.
-        var newCan:ScriptedFlxAtlasSprite = ScriptedFlxAtlasSprite.init('SpraycanAtlasSprite', 0, 0);
-
+        var newCan:SpraycanAtlasSprite = new SpraycanAtlasSprite(0, 0);
         var spraycanPile = PlayState.instance.currentStage.getNamedProp('spraycanPile');
 
-        //newCan.x = spraycanPile.x - 430;
-        //newCan.y = spraycanPile.y - 840;
+        //newCan.x = spraycanPile.x - 10;
+        //newCan.y = spraycanPile.y - 550;
         //newCan.zIndex = spraycanPile.zIndex - 1;
 
-        //newCan.scriptCall('playCanStart');
+        //newCan.playCanStart();
 
         PlayState.instance.currentStage.add(newCan);
         PlayState.instance.currentStage.refresh(); // Apply z-index.
@@ -227,7 +243,8 @@ class TwoHOTSong extends Song
         // Do nothing, but place this such that the animation plays at the right time.
       case "weekend-1-cockgun": // lol
         gunCocked = true;
-        new FlxTimer().start(1.0, function() {
+        new FlxTimer().start(1.0, function()
+        {
           gunCocked = false;
         });
       case "weekend-1-firegun":
@@ -254,7 +271,7 @@ class TwoHOTSong extends Song
     for (index in 0...spawnedCans.length)
     {
       var can = spawnedCans[index];
-      var canState = can.scriptGet('currentState');
+      var canState = can.currentState;
 
       if (canState == desiredState)
       {
@@ -267,7 +284,7 @@ class TwoHOTSong extends Song
 
   function onUpdate(event:UpdateScriptEvent)
   {
-    super.onUpdate(event);
+    cutsceneConductor?.update(cutsceneConductor.songPosition + event.elapsed * 1000);
   }
 
   function darkenStageProps()
@@ -301,7 +318,8 @@ class TwoHOTSong extends Song
 
       // If not excluded, darken.
       stageProp.color = 0xFF111111;
-      new FlxTimer().start(1 / 24, (tmr) -> {
+      new FlxTimer().start(1 / 24, (tmr) ->
+      {
         stageProp.color = 0xFF222222;
         FlxTween.color(stageProp, 1.4, 0xFF222222, 0xFFFFFFFF);
       });
@@ -332,7 +350,8 @@ class TwoHOTSong extends Song
 
       // If not excluded, blacken.
       stageProp.color = 0xFF000000;
-      new FlxTimer().start(1.0, (tmr) -> {
+      new FlxTimer().start(1.0, (tmr) ->
+      {
         stageProp.color = 0xFFFFFFFF;
       });
     }
@@ -344,11 +363,17 @@ class TwoHOTSong extends Song
 
     if (can != null)
     {
-      can.scriptSet('currentState', STATE_SHOT);
-      can.scriptCall('playCanShot');
+      can.currentState = STATE_SHOT;
+      can.playCanShot();
 
-      new FlxTimer().start(1 / 24, function(tmr) {
+      new FlxTimer().start(1 / 24, function(tmr)
+      {
         darkenStageProps();
+
+        if (HapticUtil.hapticsAvailable)
+        {
+          HapticUtil.vibrateByPreset(canVibrationPreset);
+        }
       });
     }
   }
@@ -359,7 +384,7 @@ class TwoHOTSong extends Song
 
     if (can != null)
     {
-      can.scriptSet('currentState', STATE_IMPACTED);
+      can.currentState = STATE_IMPACTED;
     }
   }
 
@@ -372,7 +397,8 @@ class TwoHOTSong extends Song
     impactParticle.y = PlayState.instance.currentStage.getBoyfriend().y - 200;
     PlayState.instance.currentStage.add(impactParticle);
 
-    impactParticle.animation.finishCallback = function() {
+    impactParticle.animation.finishCallback = function()
+    {
       impactParticle.kill();
     };
   }
@@ -420,18 +446,19 @@ class TwoHOTSong extends Song
       // Reset to standard death animation.
       GameOverSubState.musicSuffix = '-pico-explode';
       GameOverSubState.blueBallSuffix = '-pico-explode';
+      GameOverSubState.animationSuffix = '-explosion';
 
-      if (!PlayState.instance.isPracticeMode)
-        blackenStageProps();
+      if (!PlayState.instance.isPracticeMode && !PlayState.instance.isMinimalMode) blackenStageProps();
     }
     else if (HapticUtil.hapticsAvailable)
     {
       // Can hits pico.
-      HapticUtil.vibrateByPreset(canDamageVibrationPreset);
+      HapticUtil.vibrateByPreset(canVibrationPreset);
 
-      new FlxTimer().start(0.45, function(tmr) {
+      new FlxTimer().start(0.45, function(tmr)
+      {
         // Can explodes.
-        HapticUtil.vibrateByPreset(canDamageVibrationPreset);
+        HapticUtil.vibrateByPreset(canVibrationPreset);
       });
     }
   }
@@ -444,5 +471,12 @@ class TwoHOTSong extends Song
     super.onCreate(event);
 
     hasPlayedCutscene = false;
+    cutsceneConductor = null;
+
+    // Precache the assets for the song.
+    FunkinMemory.cacheTexture(Paths.image("CanImpactParticle"));
+    FunkinMemory.cacheTexture(Paths.image("SpraypaintExplosion"));
+    FunkinMemory.cacheTexture(Paths.image("spraypaintExplosionEZ"));
+    FunkinMemory.cacheTexture(Paths.image("spraycanAtlas/spritemap1"));
   }
 }

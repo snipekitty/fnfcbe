@@ -1,10 +1,12 @@
 import flixel.FlxG;
 import flixel.util.FlxTimer;
+import funkin.util.HapticUtil;
 import funkin.play.PlayState;
 import funkin.play.PauseSubState;
 import funkin.graphics.FunkinSprite;
 import funkin.play.character.AnimateAtlasCharacter;
 import funkin.play.GameOverSubState;
+import funkin.FunkinMemory;
 import StringTools;
 
 class PicoBlazinCharacter extends AnimateAtlasCharacter
@@ -78,11 +80,11 @@ class PicoBlazinCharacter extends AnimateAtlasCharacter
         playPunchHighAnim();
 
       case "weekend-1-blockhigh":
-        playBlockAnim(event.judgement);
+        playBlockAnim();
       case "weekend-1-blocklow":
-        playBlockAnim(event.judgement);
+        playBlockAnim();
       case "weekend-1-blockspin":
-        playBlockAnim(event.judgement);
+        playBlockAnim();
 
       case "weekend-1-dodgehigh":
         playDodgeAnim();
@@ -125,7 +127,7 @@ class PicoBlazinCharacter extends AnimateAtlasCharacter
     }
   }
 
-  function playAnimation(name:String, restart:Bool, ignoreOther:Bool)
+  function playAnimation(name:String, restart:Bool = false, ignoreOther:Bool = false, reversed:Bool = false)
   {
     if (name == "firstDeath")
     {
@@ -133,40 +135,34 @@ class PicoBlazinCharacter extends AnimateAtlasCharacter
 
       // Make sure the death music plays with PERFECT timing.
       new FlxTimer().start(1.25, afterPicoDeathGutPunchIntro);
-    }
-    else if (name == "deathConfirm")
-    {
-      doDeathConfirm();
+
+      if (HapticUtil.hapticsAvailable)
+      {
+        new FlxTimer().start(0.5, function(tmr:FlxTimer)
+        {
+          // Pico falls on his knees.
+          HapticUtil.vibrate(0, 0.1, 0.1, 1);
+
+          new FlxTimer().start(0.6, function(tmr:FlxTimer)
+          {
+            // Pico falls "asleep". :)
+            HapticUtil.vibrate(0, 0.1, 0.1, 1);
+          });
+        });
+      }
     }
     else
     {
-      super.playAnimation(name, restart, ignoreOther);
+      super.playAnimation(name, restart, ignoreOther, reversed);
     }
 
-    super.playAnimation(name, restart, ignoreOther);
+    super.playAnimation(name, restart, ignoreOther, reversed);
   }
 
   function afterPicoDeathGutPunchIntro():Void
   {
     GameOverSubState.instance.startDeathMusic(1.0, false);
     playAnimation('deathLoop', true, false);
-  }
-
-  function doDeathConfirm():Void
-  {
-    var picoDeathConfirm:FunkinSprite = FunkinSprite.createSparrow(this.x + 905, this.y + 1030, 'picoBlazinDeathConfirm');
-    picoDeathConfirm.animation.addByPrefix('confirm', "Pico Gut Punch Death0", 24, false);
-    picoDeathConfirm.animation.play('confirm');
-    picoDeathConfirm.scale.set(1.75, 1.75);
-    picoDeathConfirm.zIndex = 1000;
-    FlxG.state.subState.add(picoDeathConfirm);
-    picoDeathConfirm.visible = true;
-    this.visible = false;
-
-    picoDeathConfirm.animation.finishCallback = () -> {
-      picoDeathConfirm.visible = false;
-      this.visible = true;
-    }
   }
 
   function onNoteMiss(event:NoteScriptEvent)
@@ -307,21 +303,21 @@ class PicoBlazinCharacter extends AnimateAtlasCharacter
   function getDarnell()
   {
     if (this.debug) return null;
-    return PlayState.instance.currentStage.getDad();
+    return currentStage.getDad();
   }
 
   function moveToBack()
   {
     if (this.debug) return;
     this.zIndex = 2000;
-    PlayState.instance.currentStage.refresh();
+    currentStage.refresh();
   }
 
   function moveToFront()
   {
     if (this.debug) return;
     this.zIndex = 3000;
-    PlayState.instance.currentStage.refresh();
+    currentStage.refresh();
   }
 
   function isDarnellPreppingUppercut():Void
@@ -353,29 +349,10 @@ class PicoBlazinCharacter extends AnimateAtlasCharacter
     return alternate ? '1' : '2';
   }
 
-  function playBlockAnim(?judgement:String)
+  function playBlockAnim():Void
   {
-    // on sick block, do a 3rd strike esque "tech" effect
-    if (judgement == 'sick')
-    {
-      // var blendAnims:Array<Int> = [10, 0, 10, 0, 0, 10, 0, 0, 10, 0, 10];
-      //
-      // for (blendMode in 0...blendAnims.length)
-      // {
-      //	new FlxTimer().start(blendMode / 60, function(_) {
-      //
-      //		if (blendAnims[blendMode] != 10)
-      //			this.color = 0xFF0000FF;
-      //		else
-      //			this.color = 0xFFFFFFFF;
-      //
-      //		this.blend = blendAnims[blendMode];
-      //	});
-      // }
-    }
-
     this.playAnimation('block', true, false);
-    PlayState.instance.camGame.shake(0.002, 0.1);
+    PlayState.instance?.camGame?.shake(0.002, 0.1);
     moveToBack();
   }
 
@@ -414,7 +391,7 @@ class PicoBlazinCharacter extends AnimateAtlasCharacter
     this.playAnimation('uppercut', true, false);
     if (hit)
     {
-      PlayState.instance.camGame.shake(0.005, 0.25);
+      PlayState.instance?.camGame?.shake(0.005, 0.25);
     }
     moveToFront();
   }
@@ -422,40 +399,42 @@ class PicoBlazinCharacter extends AnimateAtlasCharacter
   function playUppercutHitAnim()
   {
     this.playAnimation('uppercutHit', true, false);
-    PlayState.instance.camGame.shake(0.005, 0.25);
+    PlayState.instance?.camGame?.shake(0.005, 0.25);
     moveToBack();
   }
 
   function playHitHighAnim()
   {
     this.playAnimation('hitHigh', true, false);
-    PlayState.instance.camGame.shake(0.0025, 0.15);
+    PlayState.instance?.camGame?.shake(0.0025, 0.15);
     moveToBack();
   }
 
   function playHitLowAnim()
   {
     this.playAnimation('hitLow', true, false);
-    PlayState.instance.camGame.shake(0.0025, 0.15);
+    PlayState.instance?.camGame?.shake(0.0025, 0.15);
     moveToBack();
   }
 
   function playHitSpinAnim()
   {
     this.playAnimation('hitSpin', true, false, true);
-    PlayState.instance.camGame.shake(0.0025, 0.15);
+    PlayState.instance?.camGame?.shake(0.0025, 0.15);
     moveToBack();
   }
 
   function playPunchHighAnim()
   {
-    this.playAnimation('punchHigh' + doAlternate(), true, false);
+    var postfix:String = doAlternate();
+    this.playAnimation('punchHigh' + postfix, true, false);
     moveToFront();
   }
 
   function playPunchLowAnim()
   {
-    this.playAnimation('punchLow' + doAlternate(), true, false);
+    var postfix:String = doAlternate();
+    this.playAnimation('punchLow' + postfix, true, false);
     moveToFront();
   }
 

@@ -9,6 +9,43 @@
     },
     {
       "danceEvery": 0,
+      "zIndex": 20,
+      "position": [-816, -38],
+      "scale": [6, 6],
+      "animType": "sparrow",
+      "name": "school",
+      "isPixel": true,
+      "assetPath": "weeb/erect/evil/weebSchool",
+      "scroll": [0.75, 0.75],
+      "animations": []
+    },
+
+    {
+      "danceEvery": 0,
+      "zIndex": 25,
+      "position": [1416, 464],
+      "scale": [6, 6],
+      "name": "backspike",
+      "animType": "sparrow",
+      "isPixel": true,
+      "assetPath": "weeb/erect/evil/backSpike",
+      "scroll": [0.85, 0.85],
+      "animations": []
+    },
+    {
+      "danceEvery": 0,
+      "zIndex": 15,
+      "position": [-842, -180],
+      "scale": [6, 6],
+      "name": "backspikes",
+      "animType": "sparrow",
+      "isPixel": true,
+      "assetPath": "weeb/erect/evil/weebBackSpikes",
+      "scroll": [0.5, 0.5],
+      "animations": []
+    },
+    {
+      "danceEvery": 0,
       "zIndex": 30,
       "position": [-662, 6],
       "scale": [6, 6],

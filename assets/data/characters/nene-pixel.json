@@ -1,10 +1,12 @@
 {
   "version": "1.0.0",
-  "name": "Nene",
+  "name": "Nene (Pixel)",
   "assetPath": "characters/nenePixel/nenePixel",
   "startingAnimation": "danceRight",
   "isPixel": true,
   "scale": 6,
+  "offsets": [-7, -23],
+  "cameraOffsets": [-7, -107],
   "animations": [
     {
       "name": "danceLeft",
