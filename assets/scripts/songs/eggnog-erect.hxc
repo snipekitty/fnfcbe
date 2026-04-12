@@ -79,6 +79,7 @@ class EggnogErectSong extends Song
 
   function startCutscene()
   {
+    /*
     skipText = new FlxText(936 * FullScreenScaleMode.wideScale.x, 618 * FullScreenScaleMode.wideScale.y, 0,
       'Skip [ ' + PlayState.instance.controls.getDialogueNameFromToken("CUTSCENE_ADVANCE", true) + ' ]', 20);
     if (FlxG.onMobile)
@@ -171,14 +172,8 @@ class EggnogErectSong extends Song
       PlayState.instance.camHUD.fade(0xFF000000, 1, false, null, true);
     });
 
-    new FlxTimer().start(16, function(tmr)
-    {
-      if (!cutsceneSkipped)
-      {
-        PlayState.instance.camHUD.fade(0xFF000000, 0.5, true, null, true);
+    */
         PlayState.instance.endSong(true);
-      }
-    });
   }
 
   function onUpdate(event:UpdateScriptEvent)

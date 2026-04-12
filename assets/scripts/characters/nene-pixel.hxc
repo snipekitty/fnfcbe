@@ -1,6 +1,5 @@
 import funkin.play.character.SparrowCharacter;
 import funkin.play.PlayState;
-import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.group.FlxTypedSpriteGroup;
 import funkin.graphics.FunkinSprite;
@@ -241,7 +240,7 @@ class NenePixelCharacter extends SparrowCharacter
     if (scriptEvent.eventData.eventKind == "FocusCamera")
     {
       var eventProps = scriptEvent.eventData.value;
-      switch (Std.parseInt(eventProps.char))
+      switch (eventProps.char)
       {
         case 0:
           movePupilsRight();
@@ -370,7 +369,7 @@ class NenePixelCharacter extends SparrowCharacter
 
   function shouldTransitionState():Bool
   {
-    return currentStage.getBoyfriend().characterId != "pico-blazin";
+    return currentStage.getBoyfriend()?.characterId != "pico-blazin";
   }
 
   function transitionState()

@@ -1,0 +1,40 @@
+{
+ "version": "2.2.4",
+ "songName": "Illusionary Night",
+ "artist": "ELECTR",
+ "charter": "[GS]Antunder",
+ "offsets": { },
+ "playData": {
+  "difficulties": [
+   "easy",
+   "normal",
+   "hard"
+  ],
+  "characters": {
+   "player": "bf",
+   "girlfriend": "gf",
+   "opponent": "dad",
+   "opponentVocals": [
+    "dad"
+   ],
+   "playerVocals": [
+    "bf"
+   ]
+  },
+  "stage": "mainStage",
+  "noteStyle": "funkin",
+  "ratings": {
+   "normal": 15
+  },
+  "previewEnd": 0
+ },
+ "generatedBy": "Friday Night Funkin' - v0.8.4",
+ "timeChanges": [
+  {
+   "t": 0,
+   "b": 0,
+   "bpm": 240,
+   "bt": [4, 4, 4, 4]
+  }
+ ]
+}

@@ -368,7 +368,7 @@ class TwoHOTSong extends Song
 
       new FlxTimer().start(1 / 24, function(tmr)
       {
-        darkenStageProps();
+        //darkenStageProps();
 
         if (HapticUtil.hapticsAvailable)
         {
@@ -474,9 +474,9 @@ class TwoHOTSong extends Song
     cutsceneConductor = null;
 
     // Precache the assets for the song.
-    FunkinMemory.cacheTexture(Paths.image("CanImpactParticle"));
-    FunkinMemory.cacheTexture(Paths.image("SpraypaintExplosion"));
-    FunkinMemory.cacheTexture(Paths.image("spraypaintExplosionEZ"));
-    FunkinMemory.cacheTexture(Paths.image("spraycanAtlas/spritemap1"));
+    //FunkinMemory.cacheTexture(Paths.image("CanImpactParticle"));
+    //FunkinMemory.cacheTexture(Paths.image("SpraypaintExplosion"));
+    //FunkinMemory.cacheTexture(Paths.image("spraypaintExplosionEZ"));
+    //FunkinMemory.cacheTexture(Paths.image("spraycanAtlas/spritemap1"));
   }
 }

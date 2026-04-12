@@ -2,7 +2,6 @@ package funkin.play.character;
 
 import funkin.play.character.AnimateAtlasCharacter;
 import funkin.play.PlayState;
-import flixel.FlxG;
 import funkin.graphics.FunkinSprite;
 import funkin.audio.visualize.ABotVis;
 
@@ -268,7 +267,7 @@ class NeneBaseCharacter extends AnimateAtlasCharacter
     if (scriptEvent.eventData.eventKind == "FocusCamera")
     {
       var eventProps = scriptEvent.eventData.value;
-      switch (Std.parseInt(eventProps.char))
+      switch (eventProps.char)
       {
         case 0:
           movePupilsRight();

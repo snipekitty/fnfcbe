@@ -1,7 +1,6 @@
 package funkin.play.character;
 
 import flixel.effects.FlxFlicker;
-import flixel.FlxG;
 import flixel.group.FlxTypedSpriteGroup;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxTimer;
@@ -12,9 +11,7 @@ import funkin.play.character.MultiAnimateAtlasCharacter;
 import funkin.play.GameOverSubState;
 import funkin.play.PauseSubState;
 import funkin.play.PlayState;
-import funkin.util.Constants;
 import funkin.util.HapticUtil;
-import funkin.Preferences;
 import funkin.FunkinMemory;
 
 class PicoPlayerBaseCharacter extends MultiAnimateAtlasCharacter
@@ -306,7 +303,18 @@ class PicoPlayerBaseCharacter extends MultiAnimateAtlasCharacter
 
     if (name == "firstDeath" && frameNumber == 36 - 1)
     {
-      GameOverSubState.instance.startDeathMusic(1.0, false);
+      if (getDeathQuote() != null)
+      {
+        if (!GameOverSubState.instance.hasPlayedDeathQuote)
+        {
+          GameOverSubState.instance.hasPlayedDeathQuote = true;
+          GameOverSubState.instance.playDeathQuote();
+        }
+      }
+      else
+      {
+        GameOverSubState.instance.startDeathMusic(1.0, false);
+      }
       // force the deathloop to play in here, since we are starting the music early it
       // doesn't check this in gameover substate !
       // also no animation suffix 🤔

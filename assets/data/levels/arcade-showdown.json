@@ -1,0 +1,28 @@
+{
+  "version": "1.0.0",
+  "name": "ARCADE SHOWDOWN",
+  "titleAsset": "storymenu/titles/kapi",
+  "visible": false,
+  "props": [
+    {
+      "assetPath": "storymenu/props/kapistuff",
+      "scale": 0.675,
+      "danceEvery": 1,
+      "offsets": [0, 41],
+      "animations": [
+        {
+          "name": "idle",
+          "prefix": "Kapi Stuff",
+          "frameRate": 24
+        },
+        {
+          "name": "confirm",
+          "prefix": "Kapi Stuff",
+          "frameRate": 24
+        }
+      ]
+    }
+  ],
+  "background": "#F9CF51",
+  "songs": ["wocky", "beathoven", "hairball", "nyaw"]
+}

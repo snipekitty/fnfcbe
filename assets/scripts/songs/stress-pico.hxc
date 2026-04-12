@@ -27,7 +27,7 @@ class StressPicoMixSong extends Song
       variation: 'pico'
     });
 
-    hasPlayedCutscene = false;
+    hasPlayedCutscene = true;
   }
 
   public override function onCountdownStart(event:CountdownScriptEvent):Void
@@ -179,6 +179,7 @@ class StressPicoMixSong extends Song
 
   function startEndCutscene()
   {
+    /*
     var picoPos:Array<Float> = [PlayState.instance.currentStage.getBoyfriend()
       .cameraFocusPoint.x, PlayState.instance.currentStage.getBoyfriend().cameraFocusPoint.y];
     var otisPos:Array<Float> = [PlayState.instance.currentStage.getGirlfriend()
@@ -213,11 +214,9 @@ class StressPicoMixSong extends Song
       PlayState.instance.tweenCameraToPosition(tankmanPos[0] + 320, tankmanPos[1] - 370, 2, FlxEase.quadInOut);
       FlxTween.tween(bgSprite, {alpha: 1}, 2, null);
     });
+*/
 
-    new FlxTimer(cutsceneTimerManager).start(320 / 24, _ ->
-    {
       PlayState.instance.endSong(true);
-    });
   }
 
   function onDestroy(event:ScriptEvent):Void

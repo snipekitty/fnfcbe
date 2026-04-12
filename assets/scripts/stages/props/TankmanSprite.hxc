@@ -51,43 +51,43 @@ class TankmanSprite extends FunkinSprite
     });
   }
 
-  var rim:DropShadowShader;
+  //var rim:DropShadowShader;
 
   public function addRimlight()
   {
-    rim = new DropShadowShader();
+    //rim = new DropShadowShader();
 
-    rim.baseBrightness = -46;
-    rim.baseHue = -38;
-    rim.baseContrast = -25;
-    rim.baseSaturation = -20;
+    //rim.baseBrightness = -46;
+    //rim.baseHue = -38;
+    //rim.baseContrast = -25;
+    //rim.baseSaturation = -20;
 
-    rim.threshold = 0.4;
+    //rim.threshold = 0.4;
 
-    rim.color = 0xFFDFEF3C;
-    rim.attachedSprite = this.superClass;
+    //rim.color = 0xFFDFEF3C;
+    //rim.attachedSprite = this.superClass;
 
-    shader = rim;
+    //shader = rim;
 
     // rim.attachedSprite = tankman;
 
     animation.onFrameChange.add(function()
     {
-      rim.updateFrameInfo(this.frame);
+      //rim.updateFrameInfo(this.frame);
     });
 
     // If goingRight is false, 0 degrees = facing right.
     // If goingRight is true, 0 degrees = facing left.
 
-    rim.angle = 135; // goingRight ? 135 : 45;
+    //rim.angle = 135; // goingRight ? 135 : 45;
   }
 
   function initAnim()
   {
     // Called when the sprite is created as well as when it is revived.
 
-    animation.play('run');
-    animation.curAnim.curFrame = FlxG.random.int(0, animation.curAnim.numFrames - 1);
+    //animation.play('run');
+    //animation.curAnim.curFrame = FlxG.random.int(0, animation.curAnim.numFrames - 1);
 
     offset.y = 0;
     offset.x = 0;
@@ -104,12 +104,14 @@ class TankmanSprite extends FunkinSprite
   function update(elapsed:Float):Void
   {
     super.update(elapsed);
-
+/*
     if (animation.curAnim.name == 'shot' && animation.curAnim.curFrame >= 10 && tankmanFlicker == null)
     {
       deathFlicker();
     }
+      */
     // Check if we've reached the time when the tankman should be shot.
+    /*
     if (Conductor.instance.songPosition >= strumTime && animation.curAnim.name == 'run')
     {
       animation.play('shot');
@@ -117,8 +119,10 @@ class TankmanSprite extends FunkinSprite
       offset.y = 200;
       offset.x = 300;
     }
+      */
 
     // Move the sprite while it is running.
+    /*
     if (animation.curAnim.name == 'run')
     {
       // Here, the position is set to the target position where it will be shot.
@@ -138,6 +142,7 @@ class TankmanSprite extends FunkinSprite
       // 	this.shader.angle =
       // }
     }
+      */
 
     // Hide this sprite if it is out of view.
     // if (x >= FlxG.width * 1.2 || x <= FlxG.width * -0.5)

@@ -15,9 +15,9 @@ class SpraycanAtlasSprite extends FunkinSprite
   {
     super(x, y);
 
-    loadTextureAtlas("spraycanAtlas", "weekend1", {
-      swfMode: true
-    });
+    //loadTextureAtlas("spraycanAtlas", "weekend1", {
+      //swfMode: true
+    //});
 
     animation.onFinish.add(finishCanAnimation);
     animation.onFrameChange.add(onCanFrame);

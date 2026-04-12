@@ -62,15 +62,16 @@ class TankmanBattlefieldErectStage extends Stage
       case CharacterType.DAD:
         //rim.angle = 25;
         //rim.threshold = 0.3;
-
+/*
         if (getDad().characterId == 'tankman-bloody')
         {
-          /*
+          
           rim.loadAltMask(Paths.image('erect/masks/tankmanCaptainBloody_mask'));
           rim.maskThreshold = 1;
           rim.useAltMask = false;
-          */
+          
         }
+          */
 
         // need to save this for later for when the mask is needed
         //tankmanRim = rim;

@@ -285,19 +285,19 @@ class SserafimStage extends Stage
 
   function setCoverVisible(visible:Bool)
   {
-    getNamedProp('solidCover').alpha = visible ? 1.0 : 0.0;
+    //getNamedProp('solidCover').alpha = visible ? 1.0 : 0.0;
   }
 
   function setGirlsVisible(visibleArray:Array<Bool>)
   {
     if (visibleArray.length < 5) return;
 
-    yunjin.visible = visibleArray[0];
+    //yunjin.visible = visibleArray[0];
 
     PlayState.instance.currentStage.getDad()?.visible = visibleArray[1];
 
-    chaewon.visible = visibleArray[2];
-    eunchae.visible = visibleArray[3];
+    //chaewon.visible = visibleArray[2];
+    //eunchae.visible = visibleArray[3];
 
     PlayState.instance.currentStage.getBoyfriend()?.visible = visibleArray[4];
 
@@ -361,8 +361,8 @@ class SserafimStage extends Stage
 
     resetClear();
 
-    FlxTween.cancelTweensOf(characterShader);
-    FlxTween.cancelTweensOf(stageShader);
+    //FlxTween.cancelTweensOf(characterShader);
+    //FlxTween.cancelTweensOf(stageShader);
 
     characterShader.darkenAmount = 0;
     stageShader.darkenAmount = 0;
@@ -953,7 +953,7 @@ class SserafimStage extends Stage
     //yunjin.playAnimation('doorclosed', true, true);
     //yunjin.danceEvery = 0;
 
-    getNamedProp('truckDoor').visible = false;
+    //getNamedProp('truckDoor').visible = false;
 
     for (thing in [stageShader, characterShader, dust1, dust1.velocity, dust2, dust2.velocity, dust3, dust3.velocity, dust4, dust4.velocity])
     {
