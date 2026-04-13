@@ -3,7 +3,8 @@
   "scrollSpeed": {
     "easy": 2.8,
     "normal": 2.8,
-    "hard": 2.8
+    "hard": 2.8,
+    "old": 3
   },
   "events": [
     {
