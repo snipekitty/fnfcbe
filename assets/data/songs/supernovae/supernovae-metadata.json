@@ -1,0 +1,37 @@
+{
+ "version": "2.2.4",
+ "songName": "supernovae",
+ "artist": "idk",
+ "charter": "idk",
+ "offsets": { },
+ "playData": {
+  "difficulties": [
+    "easy",
+   "normal",
+   "hard"
+  ],
+  "characters": {
+   "player": "bf",
+   "girlfriend": "gf",
+   "opponent": "dad",
+   "opponentVocals": [
+    "bambi-old"
+   ],
+   "playerVocals": [
+    "bf"
+   ]
+  },
+  "stage": "mainStage",
+  "noteStyle": "funkin",
+  "previewEnd": 0
+ },
+ "generatedBy": "Friday Night Funkin' - v0.8.4",
+ "timeChanges": [
+  {
+   "t": 0,
+   "b": 0,
+   "bpm": 140,
+   "bt": [4, 4, 4, 4]
+  }
+ ]
+}
